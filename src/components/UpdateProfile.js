@@ -4,7 +4,7 @@ import { Card, Alert, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UpdateProfile = () => {
-    const emailref = useRef('');
+    
     const nameref = useRef('');
 
     const { currentUser, userData, updateName, getData  } = useGlobalContext();
@@ -53,14 +53,6 @@ const UpdateProfile = () => {
                             </Form.Label>
                             <Form.Control type="text" placeholder="Name" ref={nameref} required
                                 defaultValue={name} />
-                        </Form.Group>
-
-                        <Form.Group id="email">
-                            <Form.Label>
-                                Email
-                            </Form.Label>
-                            <Form.Control type="email" placeholder="Email" ref={emailref} required
-                                defaultValue={currentUser.email} />
                         </Form.Group>
                         <Button disabled={loading} className="w-100 btn btn-primary mt-2" type="submit">Update</Button>
                     </Form>
