@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useGlobalContext } from "../contexts/AuthContext";
 import { Card, Alert, Button, Form } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UpdateProfile = () => {
     const emailref = useRef('');

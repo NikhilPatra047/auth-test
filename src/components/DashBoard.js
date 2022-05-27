@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useGlobalContext } from "../contexts/AuthContext";
-import {Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DashBoard = () => {
     const [error, setError] = useState();
@@ -25,8 +25,6 @@ const DashBoard = () => {
                 <Card.Body>
                     <h2 className="text-center mb-4">Profile</h2>
                     {error && <Alert variant='danger'>{error}</Alert>}
-                    <img src="" alt="profile Image"/>
-                    <br />
                     <strong>Name: </strong> {name}
                     <br />
                     <strong>Id: </strong> {userID}
