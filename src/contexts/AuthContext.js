@@ -51,7 +51,7 @@ export function AuthProvider({ children }) {
             id = doc.id;
         });
 
-        setUserData({ name: data.name, userID: id, image: data.image});
+        setUserData({ name: data.name, userID: id, image: data.image });
     }
 
     async function uploadProfile(userName, photo) {

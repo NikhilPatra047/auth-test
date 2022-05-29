@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../contexts/AuthContext";
 import { Card, Alert, Button, Form } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
 
@@ -9,10 +9,12 @@ const UpdateProfile = () => {
 
     const { currentUser, userData, uploadProfile, getData } = useGlobalContext();
 
+    const navigate = useNavigate();
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
-    const [photo, setPhoto] = useState(null);
+    const [photo, setPhoto] = useState(userData.image);
 
     const { name } = userData;
 
@@ -29,6 +31,11 @@ const UpdateProfile = () => {
 
             setPhoto(null);
             setMessage('Updated Successfully');
+
+            setTimeout(() => {
+                navigate(-1);
+            }, 5000);
+
         } catch (err) {
             setMessage('');
             setError("Failed to update profile");

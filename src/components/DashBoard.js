@@ -23,7 +23,7 @@ const DashBoard = () => {
         return getData(currentUser.email);
     }
     useEffect(() => {
-        callGetData()
+        callGetData();
     });
 
     return (
