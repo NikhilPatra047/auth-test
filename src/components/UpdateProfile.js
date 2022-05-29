@@ -1,17 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../contexts/AuthContext";
 import { Card, Alert, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const UpdateProfile = () => {
-    
+
     const nameref = useRef('');
 
-    const { currentUser, userData, updateName, getData  } = useGlobalContext();
+    const { currentUser, userData, uploadProfile, getData } = useGlobalContext();
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
+    const [photo, setPhoto] = useState(null);
 
     const { name } = userData;
 
@@ -23,9 +24,10 @@ const UpdateProfile = () => {
             setError("");
             setLoading(true);
 
-            await updateName(nameref.current.value, currentUser.email);
+            await uploadProfile(nameref.current.value, photo);
             await getData(currentUser.email);
 
+            setPhoto(null);
             setMessage('Updated Successfully');
         } catch (err) {
             setMessage('');
@@ -35,6 +37,20 @@ const UpdateProfile = () => {
 
         setLoading(false);
     };
+
+    const handleChange = (e) => {
+        if(e.target.files[0]) {
+            setPhoto(e.target.files[0]);
+        }
+    }
+
+    async function callGetData() {
+        return getData(currentUser.email);
+    }
+
+    useEffect(() => {
+        callGetData();
+    });
 
     return (
         <>
@@ -47,6 +63,14 @@ const UpdateProfile = () => {
                     {message && <Alert variant="success">{message}</Alert>}
 
                     <Form onSubmit={handleSubmit}>
+                        <Form.Group id="name">
+                            <Form.Label>
+                                Profile Pic
+                            </Form.Label>
+                            <Form.Control type="file" name='fileName' id='myFile' onChange={handleChange}
+                            />
+                        </Form.Group>
+
                         <Form.Group id="name">
                             <Form.Label>
                                 Name

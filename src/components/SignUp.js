@@ -3,7 +3,7 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 import { useGlobalContext } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
 import { db } from '../firebase';
-import {collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 function SignUp() {
     const emailref = useRef('');
@@ -15,7 +15,7 @@ function SignUp() {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [message, setMessage] = useState(null);
     //ERROR
     async function handleSubmit(e) {
         e.preventDefault();
@@ -27,6 +27,7 @@ function SignUp() {
         try {
             setError("");
             setLoading(true);
+            setMessage('');
             await signup(emailref.current.value, passwordref.current.value);
 
             await addDoc(collection(db, 'userData'), {
@@ -34,7 +35,8 @@ function SignUp() {
                 email: emailref.current.value,
                 image: ''
             });
-
+            
+            setMessage("Account Created successfully");
         } catch (err) {
             setError("Failed to create account");
             console.log(err);
@@ -51,7 +53,7 @@ function SignUp() {
 
                     {/* { currentUser.email } */}
                     {error && <Alert variant="danger">{error}</Alert>}
-
+                    {message && <Alert variant="success">{message}</Alert>}
                     <Form onSubmit={handleSubmit}>
                         <Form.Group id="name">
                             <Form.Label>

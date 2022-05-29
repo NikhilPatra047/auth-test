@@ -3,11 +3,11 @@ Normally when we logout, even though the user gets logged out, the app still ren
 because of how react-router-dom works */
 
 import React from "react";
-import {Outlet, Navigate} from "react-router-dom"
+import { Outlet, Navigate } from "react-router-dom"
 import { useGlobalContext } from "../contexts/AuthContext";
 
-const PrivateRoute = ({element: Component, ...rest}) => {
-    const {currentUser} = useGlobalContext();
+const PrivateRoute = ({ element: Component, ...rest }) => {
+    const { currentUser } = useGlobalContext();
 
     return (
         currentUser ? <Outlet /> : <Navigate to='/login' />

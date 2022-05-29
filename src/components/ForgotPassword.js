@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { useGlobalContext } from "../contexts/AuthContext";
-import {Card, Alert, Form, Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Card, Alert, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
     const emailref = useRef('');
@@ -22,10 +22,10 @@ const ForgotPassword = () => {
             setLoading(true);
             await passwordReset(emailref.current.value);
             setMessage("Check your inbox for further instructions");
-        } catch(err) {
+        } catch (err) {
             setError("Failed to reset password");
             console.log(err);
-        }   
+        }
 
         setLoading(false);
     };
@@ -38,9 +38,9 @@ const ForgotPassword = () => {
 
                     {/* { currentUser.email } */}
                     {message && <Alert variant='success'>{message}</Alert>}
-                    { error && <Alert variant="danger">{error}</Alert> }
+                    {error && <Alert variant="danger">{error}</Alert>}
 
-                    <Form onSubmit={ handleSubmit }>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
                             <Form.Label>
                                 Email

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { Card, Form, Button, Alert} from "react-bootstrap";
-import { useGlobalContext }  from "../contexts/AuthContext";
+import { Card, Form, Button, Alert } from "react-bootstrap";
+import { useGlobalContext } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
@@ -22,12 +22,12 @@ function Login() {
             await login(emailref.current.value, passwordref.current.value);
             await getData(emailref.current.value);
 
-            navigate('/', {replace: true});
+            navigate('/', { replace: true });
 
-        } catch(err) {
+        } catch (err) {
             setError("Failed to sign in");
             console.log(err);
-        }   
+        }
 
         setLoading(false);
     };
@@ -39,9 +39,9 @@ function Login() {
                     <h2 className="text-center mb-4">Log in</h2>
 
                     {/* { currentUser.email } */}
-                    { error && <Alert variant="danger">{error}</Alert> }
+                    {error && <Alert variant="danger">{error}</Alert>}
 
-                    <Form onSubmit={ handleSubmit }>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group id="email">
                             <Form.Label>
                                 Email
